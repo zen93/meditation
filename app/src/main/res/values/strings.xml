@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Meditation</string>
+    <string name="title_home">Home</string>
+    <string name="title_relax">Relax</string>
+    <string name="title_meditation">Meditation</string>
+    <string name="title_focus">Focus</string>
+    <string-array name="languages_array">
+        <item>English</item>
+        <item>हिन्दी</item>
+        <item>中文</item>
+        <item>తెలుగు</item>
+    </string-array>
+</resources>

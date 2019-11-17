@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navigation_relax"
+        android:icon="@drawable/ic_relax"
+        android:title="@string/title_relax" />
+
+    <item
+        android:id="@+id/navigation_meditation"
+        android:icon="@drawable/ic_meditation"
+        android:title="@string/title_meditation" />
+
+    <item
+        android:id="@+id/navigation_focus"
+        android:icon="@drawable/ic_focus"
+        android:title="@string/title_focus" />
+
+</menu>
