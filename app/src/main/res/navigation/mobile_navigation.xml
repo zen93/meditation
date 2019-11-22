@@ -13,19 +13,19 @@
 
     <fragment
         android:id="@+id/navigation_relax"
-        android:name="com.example.meditation.ui.dashboard.DashboardFragment"
+        android:name="com.example.meditation.ui.relax.RelaxFragment"
         android:label="@string/title_relax"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_relax" />
 
     <fragment
         android:id="@+id/navigation_meditation"
-        android:name="com.example.meditation.ui.notifications.NotificationsFragment"
+        android:name="com.example.meditation.ui.meditation.MeditationFragment"
         android:label="@string/title_meditation"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_meditation" />
 
     <fragment
         android:id="@+id/navigation_focus"
-        android:name="com.example.meditation.ui.notifications.NotificationsFragment"
+        android:name="com.example.meditation.ui.meditation.MeditationFragment"
         android:label="@string/title_focus"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_meditation" />
 </navigation>
