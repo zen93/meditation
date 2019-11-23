@@ -41,8 +41,11 @@ public class MeditationFragment extends Fragment {
 
         myVideo = (VideoView) root.findViewById(R.id.videoView);
 
-        MediaController m = new MediaController(getActivity().getApplicationContext());
+        MediaController m = new MediaController(getActivity());
+        m.setAnchorView(myVideo);
         myVideo.setMediaController(m);
+        //myVideo.setMediaController(m);
+        //myVideo.setKeepScreenOn(true);
 
         String path = "android.resource://com.example.meditation/" + R.raw.meditation_video;
 
