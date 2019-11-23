@@ -1,4 +1,6 @@
 package com.example.meditation;
 
-public class PlaybackStatus {
+public enum PlaybackStatus {
+    PLAYING,
+    PAUSED
 }
