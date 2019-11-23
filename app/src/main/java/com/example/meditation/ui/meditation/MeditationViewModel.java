@@ -10,11 +10,11 @@ public class MeditationViewModel extends ViewModel {
 
     public MeditationViewModel() {
         mText = new MutableLiveData<>();
-<<<<<<< HEAD:app/src/main/java/com/example/meditation/ui/notifications/NotificationsViewModel.java
+ //HEAD:app/src/main/java/com/example/meditation/ui/notifications/NotificationsViewModel.java
         mText.setValue("Now this is notifications fragment, but might be meditation videopage.");
-=======
-        mText.setValue("This is meditation fragment");
->>>>>>> akshay:app/src/main/java/com/example/meditation/ui/meditation/MeditationViewModel.java
+
+        //mText.setValue("This is meditation fragment");
+ //akshay:app/src/main/java/com/example/meditation/ui/meditation/MeditationViewModel.java
     }
 
     public LiveData<String> getText() {
