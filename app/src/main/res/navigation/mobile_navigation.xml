@@ -25,7 +25,7 @@
 
     <fragment
         android:id="@+id/navigation_focus"
-        android:name="com.example.meditation.ui.meditation.MeditationFragment"
+        android:name="com.example.meditation.ui.focus.Focusfragment"
         android:label="@string/title_focus"
-        tools:layout="@layout/fragment_meditation" />
+        tools:layout="@layout/focusfragment_fragment" />
 </navigation>
