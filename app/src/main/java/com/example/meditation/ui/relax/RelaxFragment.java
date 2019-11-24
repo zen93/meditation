@@ -51,10 +51,8 @@ public class RelaxFragment extends Fragment {
             AudioService.LocalBinder binder = (AudioService.LocalBinder) service;
             player = binder.getService();
             serviceBound = true;
-            seekBar.setMax(player.getDuration());
-            int seconds = (int) (player.getDuration() / 1000) % 60;
-            int minutes = (int) (player.getDuration() / (1000*60)) % 60;
-            endTime.setText(String.format("%02d:%02d", minutes, seconds));
+
+
             mSeekbarUpdateHandler.postDelayed(mUpdateSeekbar, 0);
             checkIsPlaying();
             Toast.makeText(getContext(), "Service Bound", Toast.LENGTH_SHORT).show();
@@ -82,8 +80,9 @@ public class RelaxFragment extends Fragment {
         player.getIsPlaying().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
-                if(aBoolean)
+                if(aBoolean) {
                     play.setImageResource(R.drawable.pause);
+                }
                 else {
                     if(player.isComplete())
                         seekBar.setProgress(0);
@@ -126,6 +125,10 @@ public class RelaxFragment extends Fragment {
             int seconds = (int) (player.getCurrentPosition() / 1000) % 60;
             int minutes = (int) (player.getCurrentPosition() / (1000*60)) % 60;
             currentTime.setText(String.format("%02d:%02d", minutes, seconds));
+            seekBar.setMax(player.getDuration());
+            seconds = (int) (player.getDuration() / 1000) % 60;
+            minutes = (int) (player.getDuration() / (1000*60)) % 60;
+            endTime.setText(String.format("%02d:%02d", minutes, seconds));
             seekBar.setProgress(player.getCurrentPosition());
             mSeekbarUpdateHandler.postDelayed(this, 50);
         }
