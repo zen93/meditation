@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.AudioManager;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.session.MediaSessionManager;
 import android.os.Binder;
@@ -26,9 +27,12 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.meditation.ui.relax.RelaxFragment;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 public class AudioService extends Service implements MediaPlayer.OnCompletionListener,
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener, MediaPlayer.OnSeekCompleteListener,
@@ -41,6 +45,9 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
 
     private AudioManager audioManager;
 
+    public MutableLiveData<Integer> percentage;
+    public MutableLiveData<Boolean> playing;
+    private Boolean complete = false;
     //Handle incoming phone calls
     private boolean ongoingCall = false;
     private PhoneStateListener phoneStateListener;
@@ -68,7 +75,7 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+        return iBinder;
     }
 
     @Override
@@ -80,6 +87,9 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
     @Override
     public void onCompletion(MediaPlayer mp) {
         //Invoked when playback of a media source has completed.
+        complete = true;
+        playing.setValue(false);
+        removeNotification();
         stopMedia();
         //stop the service
         stopSelf();
@@ -127,7 +137,7 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
             case AudioManager.AUDIOFOCUS_GAIN:
                 // resume playback
                 if (mediaPlayer == null) initMediaPlayer();
-                else if (!mediaPlayer.isPlaying()) mediaPlayer.start();
+                //else if (!mediaPlayer.isPlaying()) mediaPlayer.start();
                 mediaPlayer.setVolume(1.0f, 1.0f);
                 break;
             case AudioManager.AUDIOFOCUS_LOSS:
@@ -397,7 +407,30 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources(),
                 R.drawable.image); //replace with your own image
 
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        String title = "Title";
+        String artist = "Artist";
+        String album = "Album";
+        long duration = 0;
 
+
+        try {
+            if (Build.VERSION.SDK_INT >= 14)
+                mmr.setDataSource(mediaFile, new HashMap<String, String>());
+            else
+                mmr.setDataSource(mediaFile);
+            title = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE);
+            artist = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST);
+            album = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM);
+            duration = Long.valueOf(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+            //Log.d("AudioService", "mediaFile:" + mediaFile);
+            //Log.d("AudioService", "Title: " + title + " artist: " + artist + " album: " + album);
+            mmr.release();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("AudioService", "Error:" + e.getMessage());
+            stopSelf();
+        }
         // Create a new Notification
         createNotificationChannel();
 
@@ -506,8 +539,10 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
 
         String actionString = playbackAction.getAction();
         if (actionString.equalsIgnoreCase(ACTION_PLAY)) {
+            playing.setValue(true);
             transportControls.play();
         } else if (actionString.equalsIgnoreCase(ACTION_PAUSE)) {
+            playing.setValue(false);
             transportControls.pause();
         } else if (actionString.equalsIgnoreCase(ACTION_NEXT)) {
             transportControls.skipToNext();
@@ -531,6 +566,43 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
         }
     }
 
+    public MutableLiveData<Integer> getPercentage() {
+        return percentage;
+    }
+
+    public MutableLiveData<Boolean> getIsPlaying() {
+        return playing;
+    }
+
+    public Integer getCurrentPosition() {
+        return mediaPlayer.getCurrentPosition();
+    }
+
+    public Integer getDuration() {
+        return mediaPlayer.getDuration();
+    }
+
+    public boolean isPlaying() {
+        return mediaPlayer.isPlaying();
+    }
+
+    public void pause() {
+        playing.setValue(false);
+        transportControls.pause();
+    }
+
+    public void play() {
+        playing.setValue(true);
+        transportControls.play();
+    }
+
+    public Boolean isComplete() {
+        return complete;
+    }
+
+    public void seekTo(Integer progress) {
+        mediaPlayer.seekTo(progress);
+    }
     @Override
     public void onCreate() {
         super.onCreate();
@@ -544,6 +616,8 @@ public class AudioService extends Service implements MediaPlayer.OnCompletionLis
         registerBecomingNoisyReceiver();
         //Listen for new Audio to play -- BroadcastReceiver
         register_playNewAudio();
+        percentage = new MutableLiveData<>();
+        playing = new MutableLiveData<>();
     }
 
     //The system calls this method when an activity, requests the service be started
