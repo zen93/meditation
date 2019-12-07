@@ -1,4 +1,5 @@
 <resources>
+    <string name="focus_message">మీరు దృష్టి సారించారు</string>
     <string name="app_name">ధ్యానం</string>
     <string name="title_home">హోమ్</string>
     <string name="title_relax">రిలాక్స్</string>

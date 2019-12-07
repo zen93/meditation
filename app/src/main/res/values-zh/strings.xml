@@ -1,4 +1,5 @@
 <resources>
+    <string name="focus_message">你一直专注于</string>
     <string name="app_name">冥想</string>
     <string name="title_home">家</string>
     <string name="title_relax">放松</string>

@@ -1,4 +1,5 @@
 <resources>
+    <string name="focus_message">आप के लिए ध्यान केंद्रित कर रहा है</string>
     <string name="app_name">ध्यान</string>
     <string name="title_home">होम</string>
     <string name="title_relax">आराम करें</string>

@@ -1,4 +1,5 @@
 <resources>
+    <string name="focus_message">You have been focusing for</string>
     <string name="app_name">Meditation</string>
     <string name="title_home">Home</string>
     <string name="title_relax">Relax</string>
