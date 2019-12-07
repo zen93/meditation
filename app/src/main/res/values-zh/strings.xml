@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">冥想</string>
+    <string name="title_home">家</string>
+    <string name="title_relax">放松</string>
+    <string name="title_meditation">冥想</string>
+    <string name="title_focus">焦点</string>
+    <string name="welcome">欢迎!</string>
+    <string name="quote">"冷静的头脑会带来内在的力量和自信，所以这对保持健康非常重要"</string>
+    <string name="song_title">安静的时间-David Fesliyan</string>
+    <string name="header_relax">呼吸</string>
+    <string name="header_meditation">您的冥想视频已准备就绪</string>
+    <string name="header_focus">焦点</string>
+    <string name="play_button">玩</string>
+    <string name="stop_button">停止</string>
+    <string-array name="languages_array">
+        <item>English</item>
+        <item>हिन्दी</item>
+        <item>中文</item>
+        <item>తెలుగు</item>
+    </string-array>
+</resources>

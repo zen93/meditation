@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ధ్యానం</string>
+    <string name="title_home">హోమ్</string>
+    <string name="title_relax">రిలాక్స్</string>
+    <string name="title_meditation">ధ్యానం</string>
+    <string name="title_focus">ఫోకస్</string>
+    <string name="welcome">స్వాగత!</string>
+    <string name="quote">"ప్రశాంతమైన మనస్సు అంతర్గత బలాన్ని మరియు ఆత్మవిశ్వాసాన్ని తెస్తుంది, కాబట్టి మంచి ఆరోగ్యానికి ఇది చాలా ముఖ్యం"</string>
+    <string name="song_title">నిశ్శబ్ద సమయం - డేవిడ్ ఫెస్లియన్</string>
+    <string name="header_relax">బ్రీత్</string>
+    <string name="header_meditation">మీ ధ్యాన వీడియో సిద్ధంగా ఉంది</string>
+    <string name="header_focus">ఫోకస్</string>
+    <string name="play_button">ప్లే</string>
+    <string name="stop_button">ఆపు</string>
+    <string-array name="languages_array">
+        <item>English</item>
+        <item>हिन्दी</item>
+        <item>中文</item>
+        <item>తెలుగు</item>
+    </string-array>
+</resources>

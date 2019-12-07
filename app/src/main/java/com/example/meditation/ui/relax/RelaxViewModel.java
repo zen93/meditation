@@ -4,16 +4,18 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.meditation.R;
+
 public class RelaxViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<Integer> mText;
 
     public RelaxViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Quiet Time - David Fesliyan");
+        mText.setValue(R.string.song_title);
     }
 
-    public LiveData<String> getText() {
+    public LiveData<Integer> getText() {
         return mText;
     }
 }

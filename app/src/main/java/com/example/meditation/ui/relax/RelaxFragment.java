@@ -64,18 +64,6 @@ public class RelaxFragment extends Fragment {
         }
     };
 
-    private BroadcastReceiver progress = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            try {
-                //An audio file is passed to the service through putExtra();
-                songProgress = Integer.parseInt(intent.getExtras().getString("progress"));
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.e("RelaxFragment", e.getMessage());
-            }
-        }
-    };
     private void checkIsPlaying() {
         player.getIsPlaying().observe(this, new Observer<Boolean>() {
             @Override
@@ -91,11 +79,7 @@ public class RelaxFragment extends Fragment {
             }
         });
     }
-    private void registerProgress() {
-        //Register playNewMedia receiver
-        IntentFilter filter = new IntentFilter(RelaxFragment.BROADCAST_PROGRESS);
-        getContext().registerReceiver(progress, filter);
-    }
+
     private void playAudio(String media) {
         //Check is service is active
         if (!serviceBound) {
@@ -136,16 +120,14 @@ public class RelaxFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        registerProgress();
-
         relaxViewModel =
                 ViewModelProviders.of(this).get(RelaxViewModel.class);
         View root = inflater.inflate(R.layout.fragment_relax, container, false);
         final TextView songTitleTextView = root.findViewById(R.id.songTitle);
-        relaxViewModel.getText().observe(this, new Observer<String>() {
+        relaxViewModel.getText().observe(this, new Observer<Integer>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                songTitleTextView.setText(s);
+            public void onChanged(@Nullable Integer s) {
+                songTitleTextView.setText(getContext().getString(s));
             }
         });
 
@@ -230,7 +212,6 @@ public class RelaxFragment extends Fragment {
             getActivity().unbindService(serviceConnection);
             //service is active
             player.stopSelf();
-            getContext().unregisterReceiver(progress);
         }
     }
 }

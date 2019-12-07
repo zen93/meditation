@@ -4,22 +4,24 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.meditation.R;
+
 public class HomeViewModel extends ViewModel {
 
-    private MutableLiveData<String> wText;
-    private MutableLiveData<String> qText;
+    private MutableLiveData<Integer> wText;
+    private MutableLiveData<Integer> qText;
 
     public HomeViewModel() {
         wText = new MutableLiveData<>();
-        wText.setValue("Welcome!");
+        wText.setValue(R.string.welcome);
 
         qText = new MutableLiveData<>();
-        qText.setValue("\"Calm mind brings inner strength and self-confidence, so that's very important for good health.\"");
+        qText.setValue(R.string.quote);
     }
 
-    public LiveData<String> getWelcomeText() {
+    public LiveData<Integer> getWelcomeText() {
         return wText;
     }
 
-    public LiveData<String> getQuoteText() { return qText; }
+    public LiveData<Integer> getQuoteText() { return qText; }
 }

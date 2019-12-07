@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">ध्यान</string>
+    <string name="title_home">होम</string>
+    <string name="title_relax">आराम करें</string>
+    <string name="title_meditation">ध्यान</string>
+    <string name="title_focus">ध्यान केंद्रित</string>
+    <string name="welcome">स्वागत हे!</string>
+    <string name="quote">"शांत मन आंतरिक शक्ति और आत्मविश्वास लाता है, इसलिए अच्छे स्वास्थ्य के लिए यह बहुत महत्वपूर्ण है"</string>
+    <string name="song_title">शांत समय - डेविड फ़ेसलियान</string>
+    <string name="header_relax">साँस लेना</string>
+    <string name="header_meditation">आपका ध्यान वीडियो तैयार है</string>
+    <string name="header_focus">फोकस</string>
+    <string name="play_button">प्ले</string>
+    <string name="stop_button">रुकें</string>
+    <string-array name="languages_array">
+        <item>English</item>
+        <item>हिन्दी</item>
+        <item>中文</item>
+        <item>తెలుగు</item>
+    </string-array>
+</resources>
